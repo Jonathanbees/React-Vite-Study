@@ -1,21 +1,22 @@
 import './App.css';
+import { TwitterFollowCard } from './TwitterFollowCard.jsx';
 
 export function App() {
-//Si se quiere hacer inline css, tiene que ser con {{}}
-  return (
-    <article className="tw-followCard">
-        <header className="tw-followCard-header">
-            <img src="https://unavatar.io/kikobeats" alt=""  style={{display:"flex", color:'#ffff'}} className="tw-followCard-avatar"/>
-            <div className="tw-followCard-info">
-                <strong>Kiko Beats</strong>
-                <span className="tw-followCard-infoUserName">@kiko</span>
-            </div>
-        </header>
-        <aside>
-            <button className='tw-followCard-button'>
-                Seguir
-            </button>
-        </aside>
-    </article>
-  );
+    const formatUserName = (userName) => `@${userName}`
+    return (
+        <div className='Users'>
+            <TwitterFollowCard 
+            formatUserName={formatUserName} //Se pasa la funcion como prop
+            isFollowing 
+            userName='reactjs' 
+            name='React' />
+
+            <TwitterFollowCard 
+            formatUserName={formatUserName} 
+            isFollowing={false} 
+            userName='vuejs' 
+            name='Vue' 
+            />
+        </div>
+    );
 }
