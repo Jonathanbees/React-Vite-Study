@@ -10,7 +10,7 @@ export function TwitterFollowCard({ formatUserName, userName, name }) {
     setIsFollowing es una funcion que cambia el estado de isFollowing, 
     por lo que UseState es un hook, y usa 2 parametros, 
     el estado inicial y la funcion que cambia el estado*/
-
+    
 
 
     const text = isFollowing ? 'Siguiendo' : 'Seguir'
