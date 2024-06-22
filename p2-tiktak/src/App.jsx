@@ -1,52 +1,31 @@
 import { useState } from "react"
+import confetti from "canvas-confetti"
 
-const TURNS = {
-  X: 'x',
-  O: 'o'
-  }
-/*Componente Square*/
-const Square = ({ children,isSelected, updateBoard, index}) =>{
+import { Square } from "./components/Square.jsx"
+import { WinnerModal } from "./components/WinnerModal.jsx"
 
-  const className = `square ${isSelected ? 'is-selected' : ''}`
-  const handleCLick = () => {
-    updateBoard(index)
-  }
-  return (
-    <div onClick={handleCLick} className={className}> {/*agregar evento onClick para que al hacer click en un square se ejecute la función updateBoard*/}
-      {children} 
-    </div>
-  )
-} 
-/*Fin de componente Square*/
+import { TURNS } from "./constants.js"
 
+import { checkWinnerFrom } from "./logic/board.js"
 
-const WINNER_COMBOS = [
-  [0,1,2], [3,4,5], [6,7,8], //filas
-  [0,3,6], [1,4,7], [2,5,8], //columnas
-  [0,4,8], [2,4,6] //diagonales
-]
 
 
 function App() {
-  const [board,setBoard] = useState(Array(9).fill(null)) //usar board como state, este es inmutable, por eso se usa setBoard para actualizarlo
+  const [board,setBoard] = useState(() =>
+    {
+      const boardFromStorage = window.localStorage.getItem('board')
+      return boardFromStorage ? JSON.parse(boardFromStorage) :
+      Array(9).fill(null)
+    }) //usar board como state, este es inmutable, por eso se usa setBoard para actualizarlo
 
-  const [turn, setTurn] = useState(TURNS.X) //usar turn como state
+  const [turn, setTurn] = useState(() => {
+    const turnFromStorage = window.localStorage.getItem('turn')
+    return turnFromStorage ? turnFromStorage : TURNS.X
+  }) //usar turn como state
 
   const [winner, setWinner] = useState(null) //usar winner como state, null es que no hay ganador, false = empate
 
-  const checkWinner = (boardToCheck) => {
-    //recorrer los combos ganadores y verificar si hay un ganador
-    for (const combo of WINNER_COMBOS){
-      const [a,b,c] = combo
-      if(boardToCheck[a] && // si el square no está vacío
-        boardToCheck[a] === boardToCheck[b] && // si el square a es igual al square b
-        boardToCheck[a] === boardToCheck[c]) // si el square a es igual al square c
-        { 
-        return boardToCheck[a] // x u o
-      }
-    }
-    return null //si no hay ganador
-  }
+
   const checkEndGame = (newBoard) => {
     return newBoard.every((square) => square !== null) //si todos los squares están ocupados, retornar true
   }
@@ -55,6 +34,8 @@ function App() {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
+    window.localStorage.removeItem('board')
+    window.localStorage.removeItem('turn')
   }
 
   const updateBoard = (index) => {
@@ -67,11 +48,16 @@ function App() {
     //cambiar el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
-    
+
+    //guardar partida
+    window.localStorage.setItem('board', JSON.stringify(newBoard)) //no se puede guardar el board directamente, por eso se usa JSON.stringify
+    window.localStorage.setItem('turn', newTurn) //no se puede guardar el board directamente, por eso se usa JSON.stringify
     //verificar si hay un ganador
-    const newWinner = checkWinner(newBoard)
+    const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
+      confetti()
       setWinner(newWinner)
+
     } else if (checkEndGame(newBoard)) {
       setWinner(false) //empate
     }
@@ -82,9 +68,9 @@ function App() {
       <h1>Tic tac toe</h1>
       <button onClick={resetGame}>Resetear juego</button>
       <section className="game"> 
-        {board.map((_, index) => (
+        {board.map((square, index) => (
           <Square key={index} index={index} updateBoard={updateBoard}> {/*pasar updateBoard y index como props para renderizar los squares dentro del tablero*/}
-            {board[index]}
+            {square}
           </Square>
         ))}
       </section>
@@ -96,23 +82,7 @@ function App() {
           {TURNS.O}
         </Square>
       </section>
-      {
-        winner !== null && (
-          <section className="winner">
-            <div className="text">
-              <h2>
-                {winner === false ? 'Empató' : 'Ganó'}
-              </h2>
-              <header className="win">
-                {winner && <Square>{winner}</Square>}
-              </header>
-              <footer>
-                <button onClick={resetGame}>Jugar otra vez</button>
-              </footer>
-            </div>
-          </section>
-        )
-      }
+        <WinnerModal winner={winner} resetGame={resetGame} />
     </main>
     )
   }
