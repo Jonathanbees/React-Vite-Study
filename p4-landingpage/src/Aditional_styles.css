@@ -1,0 +1,15 @@
+.carousel-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  
+  @media (max-width: 2000px) {
+    .carousel-container {
+      grid-template-columns: 50px auto 50px; /* Ajusta según necesites */
+    }
+  }
+  
+  .carousel-image {
+    width: 100%;
+    grid-column: 2;
+  }
