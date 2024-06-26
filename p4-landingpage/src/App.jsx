@@ -3,6 +3,7 @@ import emoticono from './assets/emoticono.jpg';
 import { images } from './constants.js';
 import { Header } from './components/Header.jsx';
 import { Carrousel } from './components/Carrousel.jsx';
+import { Cards } from './components/Cards.jsx';
 import './App.css';
 import './Aditional_styles.css';
 
@@ -35,11 +36,7 @@ function App() {
       < Header />
       <main className='text-gray-800 font-mono text-xl my-4 md:flex-wrap'>
         <section className='carousel grid place-items-center h-full gap-3'>
-          <div className='bg-white p-6 w-3/4 grid place-items-center border-2 border-gray-300 shadow-lg carousel-container'>
-            <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded' onClick={prevImage}>&lt;</button>
-            <img src={images[currentImageIndex]} alt="Carrusel" className="carousel-image" />
-            <button className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded' onClick={nextImage}>&gt;</button>
-          </div>
+        <Carrousel images={images} prevImage={prevImage} currentImageIndex={currentImageIndex} nextImage={nextImage} />
         </section>
 
         <br />
@@ -71,14 +68,8 @@ function App() {
           </div>
         </section>
         <section className='cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-slate-600'>
-          <div className='card bg-white p-6 m-2 grid place-items-center border-2 border-gray-300 shadow-lg'>
-            <img src={emoticono} alt="" className='w-60' />
-            <h1>hola rey</h1>
-          </div>
-          <div className='card bg-white p-6 m-2 grid place-items-center border-2 border-gray-300 shadow-lg'>
-            <img src={emoticono} alt="" className='w-60' />
-            <h1>hola rey</h1>
-          </div>
+          <Cards image={emoticono} /> 
+          <Cards image={emoticono} />
           <div className='card bg-white p-6 m-2 grid place-items-center border-2 border-gray-300 shadow-lg'>
             <img src={emoticono} alt="" className='w-60' />
             <div className='texts grid grid-cols-2 gap-4'>
