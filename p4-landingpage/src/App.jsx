@@ -67,7 +67,7 @@ function App() {
             </div>
           </div>
         </section>
-        <section className='cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-slate-600'>
+        <section className='cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-slate-600 mb-3'>
           <Cards image={emoticono} /> 
           <Cards image={emoticono} />
           <div className='card bg-white p-6 m-2 grid place-items-center border-2 border-gray-300 shadow-lg'>
@@ -85,6 +85,21 @@ function App() {
               <p>no</p>
             </div>
             <h1>hola rey</h1>
+          </div>
+        </section>
+        <section className='grid grid-rows-3 bg-slate-500 mx-1'>
+          <div className='form '>
+            <form action="">
+              <label htmlFor="">si</label>
+              <input type="email" name="hola rey" id="" />
+              <label htmlFor="">si</label>
+              <input type="email" name="hola rey" id="" />
+              <label htmlFor="">si</label>
+              <input type="email" name="hola rey" id="" />
+              <label htmlFor="">si</label>
+              <input type="email" name="hola rey" id="" />
+            </form>
+
           </div>
         </section>
 

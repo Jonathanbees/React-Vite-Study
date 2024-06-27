@@ -1,3 +1,4 @@
+//Nota: Añadir menú desplegable para más opciones (seguir practicando)
 export const Header = () => {
     return (
         <header className='w-full bg-blue-800 text-gray-100 font-mono text-xl flex justify-between items-center p-4 md:flex-col sm:flex-col lg:flex-row'>
