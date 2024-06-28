@@ -36,7 +36,7 @@ function App() {
       < Header />
       <main className='text-gray-800 font-mono text-xl my-4 md:flex-wrap'>
         <section className='carousel grid place-items-center h-full gap-3'>
-        <Carrousel images={images} prevImage={prevImage} currentImageIndex={currentImageIndex} nextImage={nextImage} />
+          <Carrousel images={images} prevImage={prevImage} currentImageIndex={currentImageIndex} nextImage={nextImage} />
         </section>
 
         <br />
@@ -68,7 +68,7 @@ function App() {
           </div>
         </section>
         <section className='cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 bg-slate-600 mb-3'>
-          <Cards image={emoticono} /> 
+          <Cards image={emoticono} />
           <Cards image={emoticono} />
           <div className='card bg-white p-6 m-2 grid place-items-center border-2 border-gray-300 shadow-lg'>
             <img src={emoticono} alt="" className='w-60' />
@@ -87,19 +87,30 @@ function App() {
             <h1>hola rey</h1>
           </div>
         </section>
-        <section className='grid grid-rows-3 bg-slate-500 mx-1'>
-          <div className='form '>
-            <form action="">
-              <label htmlFor="">si</label>
-              <input type="email" name="hola rey" id="" />
-              <label htmlFor="">si</label>
-              <input type="email" name="hola rey" id="" />
-              <label htmlFor="">si</label>
-              <input type="email" name="hola rey" id="" />
-              <label htmlFor="">si</label>
-              <input type="email" name="hola rey" id="" />
+        <section className='grid-cols-3 bg-slate-500 mx-1 p-6 w-full md:w-9/10 grid place-items-center border-2 border-gray-300 shadow-lg'>
+          <div className='form w-full'>
+            <form action="" className="space-y-4">
+              <div className='grid grid-cols-2 gap-4'>
+                <div>
+                  <label htmlFor="email1" className="block text-sm font-medium text-gray-700">Email</label>
+                  <input type="email" name="email1" id="email1" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                </div>
+                <div>
+                  <label htmlFor="email2" className="block text-sm font-medium text-gray-700">Email</label>
+                  <input type="email" name="email2" id="email2" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                </div>
+              </div>
+              <div className='grid grid-cols-2 gap-4'>
+                <div>
+                  <label htmlFor="email3" className="block text-sm font-medium text-gray-700">Email</label>
+                  <input type="email" name="email3" id="email3" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                </div>
+                <div>
+                  <label htmlFor="email4" className="block text-sm font-medium text-gray-700">Email</label>
+                  <input type="email" name="email4" id="email4" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                </div>
+              </div>
             </form>
-
           </div>
         </section>
 
