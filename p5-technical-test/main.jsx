@@ -4,6 +4,4 @@ import { createRoot } from 'react-dom/client'
 
 const root = createRoot(document.getElementById('app'));
 
-root.render(
-<h1>si</h1>,
-)
+root.render(<h1>si</h1>)
