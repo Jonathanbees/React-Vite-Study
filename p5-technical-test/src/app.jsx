@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 const CAT_FACT_ENDPOINT = `https://catfact.ninja/fact`
 export function App () {
 
-    const [fact, setFact] = useState('lorem ipsum dolor sit amet')
+    const [fact, setFact] = useState()
 
     // fetch a random fact from the API
-    useEffect(() => {
+    useEffect(() => { //promesa que se ejecuta una vez, es una promesa porque es una funcion asincrona
         fetch(CAT_FACT_ENDPOINT)
             .then(response => response.json())
             .then(data => setFact(data.fact))
