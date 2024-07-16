@@ -9,7 +9,16 @@ export function App () {
     useEffect(() => { //promesa que se ejecuta una vez, es una promesa porque es una funcion asincrona
         fetch(CAT_FACT_ENDPOINT)
             .then(response => response.json())
-            .then(data => setFact(data.fact))
+            .then(data => {
+                const {fact} = data
+                setFact(fact)
+                
+                const firstWord = fact.split(' ')[0] //array de palabras
+                const threewords = fact.split(' ').slice(0, 3).join(' ') //array de palabras ya que slice 
+                console.log(firstWord)
+                console.log(threewords)
+            }
+        )
     }, [])
 
     // render the fact
@@ -21,7 +30,7 @@ export function App () {
             <input type="text" />
             <button>Submit</button>
             <h2>Random Cat Fact</h2>
-            <p>{ fact }</p>
+            {fact && <p>{ fact }</p>}
         </main>
     );
     
